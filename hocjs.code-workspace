@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\json-server"
+		},
+		{
+			"path": "..\\30Day"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "hocjs"
+	}
+}

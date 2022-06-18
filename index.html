@@ -1,0 +1,204 @@
+<!-- 
+1. DOM HTML
+- DOM là viết tắt của từ Document Object Modal, DOM có 3 thành phần chính là Element, Attribute, Text
+2. Document Object
+- Để lấy ra Element, Atribute hoặc Text chúng ta luôn phải truy suất qua Document, Document đai diện cho toàn bộ website
+3. Get Element methods
+- là lấy ra phần tử Element trong DOM
+  có 3 
+  + qua ID: getElementByID() -> lấy được 1 phần tử
+  + qua Class: GetElementByClassName() -> lấy được nhiều phần tử
+  + qua TagName: GetElemenByTagName() -> lấy được nhiều phần tử
+  + qua CSS Selector: querySelector() -> lấy được 1 phần tử
+                      querySelectorAll() -> lấy nhiều phần tử
+  + qua HTML Collection: các đổi tượng quy vào collection
+    - thẻ a: document.anchors
+    -thẻ form: document.form
+    -thẻ img: document.imges
+4. Attribute node và text node
+- được lấy ra từ Element
+5. DOM Attribute 
+- Thêm Attribute vào Element
+  var element =  document.queryselector('')
+    element.Attribute = 'đặt tên attribute' -> nếu Attribute hợp lệ
+    element.SetAttribute('Attribute', 'đặt tên attribute') -> nếu attribute không hợp lệ
+- lấy ra Attribute 
+    element.GetAttribute() -> nếu attribute khoog hợp lệ
+    element.attribute() -> nếu attribute hợp lệ 
+5. innerText và TextContent
+- dùng để lấy ra nội dung của text
+  * trong trường hợp lấy ra nội dung (geter)
+    + innerText: lấy ra nội dung ta nhìn thấy trên website, là thuộc tính của Element node
+    + TextContent: lấy ra nội dung ta viết trong HTML, tồn tại trên cả Element node và Attribute
+  * trong trường hợp thêm nội dung khác (seter)
+    + innerText: khi sửa bên web trình duyệt sẽ nhìn thấy đúng như những gì viết ở trong HTML
+    + TextContent: trả về đúng những gì trên trình duyệt hiển thị được 
+6. innerHTML và OuterHTML
+- dung để thêm Text, Attribute , Element vào trong 1 element khác
+  * trong trường hợp lấy ra nội dung (geter)
+    + innerHTML: lấy ra nội dung HTML và hiển nó dưới dạng chuỗi
+    + OuterHTML: lấy ra chính Element gọi đến nó
+  * trong trường hợp sửa nội dung (seter)
+    + innerHTML: có thể thêm được text, Attribute, Element vào trong 1 element 
+    + OuterHTML: ghi đè chính cái Element gọi đến nó
+7. DOM CSS 
+- là thêm Css vào trong DOM
+  var element = document.queryselector('')
+    element.style.width = '100px',
+    element.style.height = '100px',
+    element.style.backGroundColor = 'red',
+  * viết ngắn gọn:
+    Object.assign('element', {
+                                width: '100px',
+                                height: '100px',
+                                backGroundColor: 'red',
+    })
+8. Classlist property
+- dùng để thêm Class vào element, là thuộc tính của element node chỉ truy cập được khi lấy ra 1 element
+  * có 4 thuộc tính ClassList
+    var element = document.queryselector('')
+    + Add: element.ClassList.Add('tên class') -> thêm Class mới
+    + Contais: element.ClassList.Contais('tên class') -> tìm kiếm class
+    + remove: element.ClassList.Remove('tên class') -> xóa bỏ class
+    + Togggle: element.ClassList.Toggle('tên class') -> nếu có class trùng tên thì xóa, không có thì thêm 1 class mới có tên đó
+9. DOM event
+- là dự kiện diễn ra trong DOM
+  + Attribute Event: là thêm attribute ngay trong thẻ element tại html
+      vidu: <h1 onclick="console.log('hùng')">HÙng Biin</h1>
+  + Asign Event: gán element và sử dung element node
+      var h1Element = document.querySelector('h1')
+      h1Element.onclick = function(e) {
+      console.log(e.target)
+     }
+
+10. DOM event example
+- là thêm các trường hợp hay gặp sư kiện trong các thẻ input / form / select, thêm sự kiện KeyUp /  KeyDown
+  * các sự kiện mới trong thẻ input, form, select
+      + Onchange: khi value của thẻ input thay đổi thì in ra value đó
+      + Oninput: khi nhập value vào thẻ input thì in ra value đó(gõ đến đâu in đến đó)
+    - checked: kiểm tra đã check hay chửa
+  * KeyUp / KeyDown sự kiện trên bàn phím, chuột
+      + OnKeyUp: khí phím nhấc lên nó được thực thi
+      + OnKeyDown: khi ấn phím xuống nó được thực thi
+    - which: lấy ra mã code của phím vừa gõ
+      tìm mã code của phím vừa ấn
+        var element = document.queryselector('')
+          element.OnKeyUp = function(e) {
+            console.log(e.which)
+          }
+
+11. PreVentDefault và StopPropagation
+- ngăn chặn hành vi mặc định / ngăn chặn sự kiện nổi bọt
+  + PreventDefault
+        var aElement = document.querySelectorAll('a') 
+        for(var i = 0; i < aElement.length; i++) {
+          aElement[i].onclick = function(e) {
+            if(!e.target.href.startsWith('https://www.youtube.com/')){
+              e.preventDefault()
+            }
+          }
+        }
+  + StopPropagation
+    var h1Element = document.querySelector('ul')
+      h1Element.onclick = function(e) {
+        console.log('thẻ ul')
+          e.stopPropagation()
+      }
+12. Event listener
+- nhiều sự kiện diễn ra trong 1 element
+  var h1Element = document.querySelector('h1')
+      function viec1() {
+        console.log('việc 1')
+      }
+      function viec2() {
+        console.log('việc 2')
+      }
+      function viec3() {
+        console.log('việc 3')
+      }
+  h1Element.addEventListener('click',viec1)
+  h1Element.addEventListener('click',viec2)
+  h1Element.addEventListener('click',viec3)
+  h1Element.removeEventListener('click',viec2)
+13. JSON
+- là kiểu định dạng dũ liệu (chuỗi) viết tắt từ Javascript Oject Notation
+- JSON thể hiện các kiểu dữ liệu sau:
+  + Number: var json = '1'
+  + String: var json = '"hùng Biin"'
+  + boolean: var json = 'true' / 'false'
+  + Oject: var json = '{"name":"Hùng Biin","age":26}'
+  + Null: var json = 'Null'
+  + Array: var json = '["javascripts","Ruby"]'
+
+- parse (giải mã): từ Json -> javascript
+  + var string = 'hùng Biin'
+      console.log(JSON.parse(string))
+- stringify (mã hóa): từ Javascript type -> Json
+  + var number = 26
+      console.log(JSON.stringify(number))
+
+14. promise (sync, async)
+- promise là khái niệm sinh ra để sử lý những thao tác bất đồng bộ, trước khi có Promise thì ta sử dung callback
+  callback thì sẩy ra vấn đề là callback hell khó nhìn, khó hiểu -> sử dung Promise để khắc phục callback hell.
+- promise có 3 trạng thái 
+  * pandding: chưa chạy để lâu gây dò dỉ bộ nhớ
+  * Fulfilled: thành công
+  * reject: thất bại
+
+  + sync: đồng bộ là chạy theo luồng thứ tự trước sau
+  + async: bất đồng bộ không chạy theo luồng 
+
+* tạo promise 
+  var promise = New promise(
+    // excutor
+    function(resolve, reject) {
+      logic:
+      nếu thành công: resolve()
+      nếu thất bại: reject()
+    }
+  );
+  promise
+    .then(function{
+      nếu logic trả resolve thì then chạy
+    })
+    .catch(function{
+      nếu logic trả reject thì catch chạy
+    })
+    .finally(function{
+      1 trong 2 tk trên được chạy thì finally chạy là xong
+    })
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <div class="container">
+    <form action="">
+      <input type="text" placeholder="input text">
+      <button type="submit">Add</button>
+    </form>
+
+    <ul class="todo">
+      
+    </ul>
+  </div>
+
+
+  <script pt src="./app.js"></script>
+</body>
+</html>
+
+
+
+
+
